@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Dart Files in Browser</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .file-content {
+            width: 80%;
+            max-width: 700px;
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sign in here</h1>
+    <div class="buttons">
+        <button onclick="loadFileContent('main.dart')">Full</button>
+        <button onclick="loadFileContent('simple.dart')">simple</button>
+        <button onclick="loadFileContent('p1.dart')">Loop</button>
+        <button onclick="loadFileContent('p2.dart')">Even Odd</button>
+        <button onclick="loadFileContent('p3.dart')">Find Greatest</button>
+        <button onclick="loadFileContent('p4.dart')">Loop with condition</button>
+    </div>
+    <div id="content" class="file-content">Welcome to Flutlab - Online IDE</div>
+
+    <script>
+        async function loadFileContent(fileName) {
+            try {
+                const response = await fetch(fileName);
+                if (!response.ok) throw new Error('File not found');
+                const text = await response.text();
+                document.getElementById('content').textContent = text;
+            } catch (error) {
+                document.getElementById('content').textContent = 'Error loading file content';
+            }
+        }
+    </script>
+</body>
+</html>
